@@ -69,7 +69,7 @@ app.post('/loginUser', (req, res) => {
 			user: req.body.user,
 			password: req.body.password
 		};
-		console.log("incoming message:" + JSON.stringify(messagesssssss));
+		console.log("incoming message:" + JSON.stringify(message));
 		let response = {
 			success: false,
 			msg: "search failed"
