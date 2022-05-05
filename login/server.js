@@ -14,6 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const jsonpath = "./students.json";
 const app = express();
+const app = express.router();
 const port = 1278;
 const identityKey = 'skey';
 
@@ -69,4 +70,48 @@ app.get('/showAllUser', (req, res) => {
 
 app.post('/insertWallet', (req, res) => {
 	
+});
+
+router.post('/loginUser',function (req,res){
+	//console.log(req);
+	try{
+		let message = {
+			user: req.body.user,
+			password: req.body.password
+		};
+		let response = {
+			success:false,
+			msg:"查询失败"
+		}
+		var pattern = /["'=]+/;
+		if(pattern.test(userName)){
+			response.msg = "非法攻击";
+			res.end(JSON.stringify(response));
+		}
+		/*
+		var sql = 'select * from userInfo where name = "'+userName+'" and password="'+password+'"';
+		console.log(sql);
+		mysql.query(sql,function(err,result,fildes){})
+		*/
+		console.log(result);
+		 if (result.length == 0) {
+			response.errormsg = "无此人信息";
+			 res.end(JSON.stringify(response));
+		 }else{
+			response.success = true;
+			response.errormsg = "查询成功";
+			var sess = req.session;
+			sess.regenerate(function(err){ //添加session信息
+				req.session.loginUser =  params.userName;
+				 res.end(JSON.stringify(response));
+				
+			})
+			
+		 }
+		console.log(userName)
+	} catch(e) {
+		 try {
+            callback(false, JSON.stringify(e));
+        } catch (e) {}
+	}
 });
