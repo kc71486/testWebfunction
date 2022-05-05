@@ -3,18 +3,6 @@ const require = createRequire(import.meta.url);
 
 var crypto = require('crypto');
 
-const jsonpath = "./students.json";
-const logintable = [
-	["1234", "ABCD"],
-	["5678", "EFGH"],
-	["A123", "0123"],
-	["92231", "95414"],
-	["0000", "9999"],
-	["CCKK", "kkcc"],
-	["qwerty", "asdfgh"],
-	["user", "password"]
-];
-
 function saveJSON(src, obj) {
 	let tmp = JSON.stringify(obj), fs = require('fs');
 	fs.writeFile(jsonpath, tmp, function (err) {

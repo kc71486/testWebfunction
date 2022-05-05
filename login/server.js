@@ -55,7 +55,8 @@ app.post('/insertUser', (req, res) => {
 		user: req.body.user,
 		password: req.body.password
 	};
-	allstu[req.body.user] = req.body.password;
+	let hashed = crypto.createHash("sha256").update(req.body.user + "@" + req.body.password, "utf8").digest("hex");
+	allstu.push([req.body.user, req.body.password, hashed]);
 	saveJSON(jsonpath, allstu);
 	res.send("stored: "+JSON.stringify(message));
 });
@@ -106,7 +107,7 @@ router.post('/loginUser', (req, res) => {
 	}
 });
 
-app.get('/logout', function(req, res, next){
+app.get('/logoutUser', function(req, res, next){
     req.session.destroy(function(err) {
         if(err){
             res.end("logout failed");
