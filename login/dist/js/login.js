@@ -84,15 +84,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
 		event.preventDefault();
 		insertUserRequest();
 	};
-	document.getElementById("#login-user-form button[type='submit']").onclick = (event) => {
+	document.querySelector("#login-user-form button[type='submit']").onclick = (event) => {
 		event.preventDefault();
 		loginUserRequest();
 	};
-	document.getElementById("#showAll-user-form button[type='submit']").onclick = (event) => {
+	document.querySelector("#showAll-user-form button[type='submit']").onclick = (event) => {
 		event.preventDefault();
 		showAllUserRequest();
 	};
-	document.getElementById("#insert-wallet-form button[type='submit']").onclick = (event) => {
+	document.querySelector("#insert-wallet-form button[type='submit']").onclick = (event) => {
 		event.preventDefault();
 		insertWalletRequest();
 	};
