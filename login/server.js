@@ -111,7 +111,9 @@ app.post('/loginUser', (req, res) => {
 	} catch(e) {
 		 try {
             callback(false, JSON.stringify(e));
-        } catch (e) {}
+        } catch (e) {
+			console.log("here");
+		}
 	}
 });
 
