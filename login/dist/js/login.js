@@ -48,7 +48,9 @@ async function showAllUserRequest() {
 			Promise.resolve(response);
 		else
 			Promise.reject(new Error(response.statusText));
-	}).then(response => response.json()).then(function(result) {
+	}).then(function(response) {
+		return response.json();
+	}).then(function(result) {
 		let userlist = "";
 		Object.entries(result).forEach(([key, value]) => {
 			userlist += `\"${key}\":\"${value}\"<br>`;
