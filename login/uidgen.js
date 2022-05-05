@@ -3,8 +3,6 @@ const require = createRequire(import.meta.url);
 
 var crypto = require('crypto');
 
-usr = ["1234", "5678", "A123", "92231", "0000", "CCKK", "qwerty", "user"]
-passwd = ["ABCD", "EFGH", "0123", "95414", "9999", "kkcc", "asdfgh", "password"]
 const jsonpath = "./students.json";
 const logintable = [
 	["1234", "ABCD"],
