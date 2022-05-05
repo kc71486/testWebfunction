@@ -41,7 +41,18 @@ async function loginUserRequest() {
 	});
 }
 async function logoutUserRequest() {
-	
+	window.fetch(LOGIN_USER_URL, {
+		method: "GET"
+	}).then(function(response) {
+		if (response.status >= 200 && response.status < 300)
+			return response;
+		else
+			throw new Error(response.statusText);
+	}).then(function(response) {
+		document.getElementById("login-user-output").innerHTML = response.text();
+	}).catch(function(err) {
+		console.log("Fetch Error :-S", err);
+	});
 }
 async function showAllUserRequest() {
 	window.fetch(SHOWALL_USER_URL, {
