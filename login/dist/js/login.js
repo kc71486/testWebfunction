@@ -52,7 +52,7 @@ async function showAllUserRequest() {
 		let userlist = "";
 		Object.entries(result).forEach(([key, value]) => {
 			userlist += `\"${key}\":\"${value}\"<br>`;
-		};
+		});
 		document.getElementById("showAll-user-output").innerHTML = userlist;
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
