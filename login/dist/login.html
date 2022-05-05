@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<script src="js/jquery-3.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/library.js"></script>
+	<script defer src="js/login.js"></script>
+	<title>Test Page</title>
+</head>
+<body>
+	<h3>User Sign-up</h3>
+	<form id="insert-user-form">
+		username: <input type="text" name="username"><br>
+		password: <input type="text" name="password"><br>
+		<button type="submit">confirm</button>
+	</form>
+	<div id="insert-user-output"></div>
+
+	<h3>User Log-in</h3>
+	<form id="login-user-form">
+		username: <input type="text" name="username" value="1231"><br>
+		password: <input type="text" name="password" value="7777"><br>
+		<button type="submit">confirm</button>
+	</form>
+	<div id="login-user-output">Success!</div>
+
+	<h3>Show All user</h3>
+	<form id="showAll-user-form">
+		<button type="submit">showAllUser</button>
+	</form>
+	<div id="showAll-user-output">
+		user1: 7shian, password: 777 <br>
+		user2: 7shian, password: 777 <br>
+		user3: 1231, password: 7777 <br>
+		user4: 789, password: 7777 <br>
+		user5: ergw, password: gbb <br>
+	</div>
+
+	<br><br>
+
+	<h3>Wallet Create</h3>
+	<form id="insert-wallet-form">
+		wallet name: <input type="text" name="wallet" value="111"><br>
+		<button type="submit">confirm</button>
+	</form>
+	<div id="insert-wallet-output"></div>
+</body>
+</html>

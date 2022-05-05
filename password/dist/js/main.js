@@ -45,13 +45,13 @@ btn.onclick = async (event) => {
 	console.log(userinfo);
 }
 
-function loginrequest() 
+function loginrequest() { 
 	let xhttp = new XMLHttpRequest(), url="/login";
 	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 	xhttp.send(JSON.stringify({
-		name=document.getElementById("user").value,
-		_password=document.getElementById("passwd").value}));
+		name:document.getElementById("user").value,
+		_password:document.getElementById("passwd").value}));
 	xhttp.onreadystatechange = function() {
 		if(xhttp.readyState == 4 && Math.floor(xhttp.status/100) == 2) {
 			document.getElementById("showarea").innerHTML = xhttp.responseText;
