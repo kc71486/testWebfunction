@@ -91,6 +91,7 @@ app.post('/loginUser', (req, res) => {
 		}
 		if (result.length == 0) {
 			response.msg = "no such user";
+			console.log(JSON.stringify(response));
 			res.send(JSON.stringify(response));
 		}else{
 			response.success = true;
