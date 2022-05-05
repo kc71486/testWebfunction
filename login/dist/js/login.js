@@ -12,7 +12,7 @@ async function insertUserRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			Promise.reject(new Error(response.statusText));
+			throw new Error(response.statusText);
 	}).then(function(response) {
 		document.getElementById("insert-user-output").innerHTML = response.text();
 	}).catch(function(err) {
@@ -33,12 +33,15 @@ async function loginUserRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			return new Promise((resolve, reject) => reject(new Error(response.statusText)));
+			throw new Error(response.statusText);
 	}).then(function(response) {
 		document.getElementById("login-user-output").innerHTML = response.text();
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
+}
+async function logoutUserRequest() {
+	
 }
 async function showAllUserRequest() {
 	window.fetch(SHOWALL_USER_URL, {
@@ -47,7 +50,7 @@ async function showAllUserRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			return new Promise((resolve, reject) => reject(new Error(response.statusText)));
+			throw new Error(response.statusText);
 	}).then(response => response.json()).then(function(result) {
 		let userlist = "";
 		Object.entries(result).forEach(([key, value]) => {
@@ -71,7 +74,7 @@ async function insertWalletRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			return new Promise((resolve, reject) => reject(new Error(response.statusText)));
+			throw new Error(response.statusText);
 	}).then(function(response) {
 		document.getElementById("insert-wallet-output").innerHTML = response.text();
 	}).catch(function(err) {
@@ -87,6 +90,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 	document.querySelector("#login-user-form button[type='submit']").onclick = (event) => {
 		event.preventDefault();
 		loginUserRequest();
+	};
+	document.querySelector("#logout-user-form button[type='submit']").onclick = (event) => {
+		event.preventDefault();
+		logoutUserRequest();
 	};
 	document.querySelector("#showAll-user-form button[type='submit']").onclick = (event) => {
 		event.preventDefault();
