@@ -14,7 +14,7 @@ async function insertUserRequest() {
 		else
 			Promise.reject(new Error(response.statusText));
 	}).then(function(response) {
-		document.getElementById("login-user-output").innerHTML = response.text();
+		document.getElementById("insert-user-output").innerHTML = response.text();
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
@@ -35,7 +35,7 @@ async function loginUserRequest() {
 		else
 			return new Promise((resolve, reject) => reject(new Error(response.statusText)));
 	}).then(function(response) {
-		document.getElementById("insert-wallet-output").innerHTML = response.text();
+		document.getElementById("login-user-output").innerHTML = response.text();
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
