@@ -102,7 +102,7 @@ app.post('/loginUser', (req, res) => {
 		}else{
 			response.success = true;
 			response.msg = "login successfully";
-				.session.regenerate(function(err){ //add session info
+			req.session.regenerate(function(err){ //add session info
 				req.session.loginUser =  message.user;
 				res.send(JSON.stringify(response));
 			});
