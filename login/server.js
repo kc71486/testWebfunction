@@ -69,13 +69,11 @@ app.post('/loginUser', (req, res) => {
 			user: req.body.user,
 			password: req.body.password
 		};
-		console.log("incoming message:" + JSON.stringify(message));
 		let response = {
 			success: false,
 			msg: "search failed"
 		};
-		console.log("initial response:" + JSON.stringify(response));
-		var pattern = /["'=]+/;
+		let pattern = /["'=]+/;
 		if(pattern.test(message.user)) {
 			console.log("if pattern test");
 			response.msg = "illegal attack";
@@ -87,7 +85,7 @@ app.post('/loginUser', (req, res) => {
 		console.log(sql);
 		mysql.query(sql,function(err,result,fildes){})
 		*/
-		result = [];
+		let result = [];
 		console.log("initial result:" + result);
 		for(let i=0; i<allstu.length; i++) {
 			if(allstu[i][0] == message.user && allstu[i][1] == message.password) {
