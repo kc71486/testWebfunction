@@ -62,7 +62,7 @@ app.post('/insertUser', (req, res) => {
 	res.send("stored: "+JSON.stringify(message));
 });
 
-router.post('/loginUser', (req, res) => {
+app.post('/loginUser', (req, res) => {
 	//console.log(req);
 	try{
 		let message = {
