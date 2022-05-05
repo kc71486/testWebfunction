@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 
-import express from 'express'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import bodyParser from 'body-parser'
 import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url);
+const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const require = createRequire(import.meta.url);
 const jsonpath = "./students.json";
-
 const app = express();
 const port = 1278;
 
