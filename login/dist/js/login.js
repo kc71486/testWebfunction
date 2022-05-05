@@ -44,13 +44,13 @@ async function showAllUserRequest() {
 	window.fetch(SHOWALL_USER_URL, {
 		method: "GET"
 	}).then(function(response) {
-		if (response.status >= 200 && response.status < 300)
-			Promise.resolve(response);
+		if (response.status >= 200 && response.status < 300) {
+			console.log(response);
+			return response;
+		}
 		else
 			Promise.reject(new Error(response.statusText));
-	}).then(function(response) {
-		return response.json();
-	}).then(function(result) {
+	}).then(response => response.json()).then(function(result) {
 		let userlist = "";
 		Object.entries(result).forEach(([key, value]) => {
 			userlist += `\"${key}\":\"${value}\"<br>`;
