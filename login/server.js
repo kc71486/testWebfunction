@@ -69,7 +69,7 @@ app.post('/loginUser', (req, res) => {
 			user: req.body.user,
 			password: req.body.password
 		};
-		console.log("incoming message:" + JSON.stringify(response));
+		console.log("incoming message:" + JSON.stringify(messagesssssss));
 		let response = {
 			success: false,
 			msg: "search failed"
@@ -102,17 +102,18 @@ app.post('/loginUser', (req, res) => {
 		}else{
 			response.success = true;
 			response.msg = "login successfully";
-			req.session.regenerate(function(err){ //add session info
+				.session.regenerate(function(err){ //add session info
 				req.session.loginUser =  message.user;
 				res.send(JSON.stringify(response));
 			});
 		}
 		console.log(userName)
 	} catch(e) {
-		 try {
-            callback(false, JSON.stringify(e));
-        } catch (e) {
-			console.log("here");
+		try {
+			res.status(500).send("something went wrong");
+			console.log(e);
+		} catch (e2) {
+			console.log("something went wrong again");
 		}
 	}
 });
