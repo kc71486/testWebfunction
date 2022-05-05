@@ -76,7 +76,7 @@ app.post('/loginUser', (req, res) => {
 		};
 		console.log("initial response:" + JSON.stringify(response));
 		var pattern = /["'=]+/;
-		if(pattern.test(userName)) {
+		if(pattern.test(message.user)) {
 			console.log("if pattern test");
 			response.msg = "illegal attack";
 			res.send(JSON.stringify(response));
