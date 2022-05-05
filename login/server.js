@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const jsonpath = "./students.json";
 const app = express();
-const app = express.router();
+const router = express.Router();
 const port = 1278;
 const identityKey = 'sessionid';
 
