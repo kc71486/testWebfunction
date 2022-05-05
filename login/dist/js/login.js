@@ -34,8 +34,8 @@ async function loginUserRequest() {
 			return response;
 		else
 			throw new Error(response.status +":"+response.statusText);
-	}).then(function(response) {
-		document.getElementById("login-user-output").innerHTML = response.json();
+	}).then(response => response.json()).then(function(result) {
+		document.getElementById("login-user-output").innerHTML = result.msg;
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
