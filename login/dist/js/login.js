@@ -12,7 +12,7 @@ async function insertUserRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			throw new Error(response.statusText);
+			throw new Error(response.status +":"+response.statusText);
 	}).then(function(response) {
 		document.getElementById("insert-user-output").innerHTML = response.text();
 	}).catch(function(err) {
@@ -33,7 +33,7 @@ async function loginUserRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			throw new Error(response.statusText);
+			throw new Error(response.status +":"+response.statusText);
 	}).then(function(response) {
 		document.getElementById("login-user-output").innerHTML = response.text();
 	}).catch(function(err) {
@@ -47,7 +47,7 @@ async function logoutUserRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			throw new Error(response.statusText);
+			throw new Error(response.status +":"+response.statusText);
 	}).then(function(response) {
 		document.getElementById("login-user-output").innerHTML = response.text();
 	}).catch(function(err) {
@@ -61,7 +61,7 @@ async function showAllUserRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			throw new Error(response.statusText);
+			throw new Error(response.status +":"+response.statusText);
 	}).then(response => response.json()).then(function(result) {
 		let userlist = "";
 		Object.entries(result).forEach(([key, value]) => {
@@ -85,7 +85,7 @@ async function insertWalletRequest() {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
-			throw new Error(response.statusText);
+			throw new Error(response.status +":"+response.statusText);
 	}).then(function(response) {
 		document.getElementById("insert-wallet-output").innerHTML = response.text();
 	}).catch(function(err) {
