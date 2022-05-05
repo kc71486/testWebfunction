@@ -10,7 +10,7 @@ async function insertUserRequest() {
 		})
 	}).then(function(response) {
 		if (response.status >= 200 && response.status < 300)
-			Promise.resolve(response);
+			return response;
 		else
 			Promise.reject(new Error(response.statusText));
 	}).then(function(response) {
@@ -31,9 +31,9 @@ async function loginUserRequest() {
 		})
 	}).then(function(response) {
 		if (response.status >= 200 && response.status < 300)
-			Promise.resolve(response);
+			return response;
 		else
-			Promise.reject(new Error(response.statusText));
+			return new Promise((resolve, reject) => reject(new Error(response.statusText)));
 	}).then(function(response) {
 		document.getElementById("insert-wallet-output").innerHTML = response.text();
 	}).catch(function(err) {
@@ -44,12 +44,10 @@ async function showAllUserRequest() {
 	window.fetch(SHOWALL_USER_URL, {
 		method: "GET"
 	}).then(function(response) {
-		if (response.status >= 200 && response.status < 300) {
-			console.log(response);
+		if (response.status >= 200 && response.status < 300)
 			return response;
-		}
 		else
-			Promise.reject(new Error(response.statusText));
+			return new Promise((resolve, reject) => reject(new Error(response.statusText)));
 	}).then(response => response.json()).then(function(result) {
 		let userlist = "";
 		Object.entries(result).forEach(([key, value]) => {
@@ -71,9 +69,9 @@ async function insertWalletRequest() {
 		})
 	}).then(function(response) {
 		if (response.status >= 200 && response.status < 300)
-			Promise.resolve(response);
+			return response;
 		else
-			Promise.reject(new Error(response.statusText));
+			return new Promise((resolve, reject) => reject(new Error(response.statusText)));
 	}).then(function(response) {
 		document.getElementById("insert-wallet-output").innerHTML = response.text();
 	}).catch(function(err) {
