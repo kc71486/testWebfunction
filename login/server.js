@@ -112,11 +112,12 @@ app.post('/loginUser', (req, res) => {
 app.get('/logoutUser', function(req, res, next){
     req.session.destroy(function(err) {
         if(err){
-            res.end("logout failed");
+            res.send("logout failed");
             return;
         }
         res.clearCookie(identityKey);
-        res.redirect('/');
+		res.send("logout successed");
+        //res.redirect('/');
     });
 });
 
