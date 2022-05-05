@@ -1,4 +1,4 @@
-file: login/login.js
-location: DOMContentLoaded
-message: fix selector
-detail: empty
+file: login/login.js;
+location: DOMContentLoaded;
+message: fix selector;
+detail: empty;
