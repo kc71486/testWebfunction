@@ -103,7 +103,7 @@ app.post('/loginUser', (req, res) => {
 				res.send(JSON.stringify(response));
 			}else{
 				req.session.regenerate(function(err){ //add session info
-					req.session.loginUser =  result[0][2];
+					req.session.uid =  result[0][2];
 					console.log(":" + JSON.stringify(req.session));
 					response.success = true;
 					response.msg = "login successfully";
