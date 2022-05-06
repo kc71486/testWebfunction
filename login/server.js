@@ -134,25 +134,18 @@ app.get('/logoutUser', function(req, res, next){
     });
 });
 
+app.get('/checkLogin', function(req,res){
+	if(req.session.hasOwnProperty("uid")){
+		res.send("currently logined, uid=" + req.session.uid);
+	}else{
+		res.send("not logined");
+	}
+});
+
 app.get('/showAllUser', (req, res) => {
 	res.send(JSON.stringify(allstu));
 });
 
 app.post('/insertWallet', (req, res) => {
-	console.log("+" + JSON.stringify(req.session));
-	if(req.session.uid != ""){
-		console.log("/" + JSON.stringify(req.session));
-		res.send("currently logined, uid=" + req.session.uid);
-	}else{
-		res.send("not logined");
-	}
-});
-
-app.get('/checkLogin', function(req,res){
-	if(req.session.uid != ""){
-		console.log("/" + JSON.stringify(req.session));
-		res.send("currently logined, uid=" + req.session.uid);
-	}else{
-		res.send("not logined");
-	}
+	res.end();
 });
