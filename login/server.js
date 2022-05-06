@@ -144,8 +144,8 @@ app.post('/insertWallet', (req, res) => {
 
 app.get('/checkLogin', function(req,res){
 	var logined='';
-	if(!!req.session.loginUser){
-		res.send("currently logined");
+	if(req.session.uid != ""){
+		res.send("currently logined, uid=" + req.session.uid);
 	}else{
 		res.send("not logined");
 	}
