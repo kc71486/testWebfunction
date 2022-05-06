@@ -35,7 +35,7 @@ async function loginUserRequest() {
 		else
 			throw new Error(response.status +":"+response.statusText);
 	}).then(response => response.json()).then(function(result) {
-		document.getElementById("login-user-output").innerHTML = result.msg;
+		document.getElementById("login-state-output").innerHTML = result.msg;
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
@@ -49,7 +49,21 @@ async function logoutUserRequest() {
 		else
 			throw new Error(response.status +":"+response.statusText);
 	}).then(response => response.text()).then(function(response) {
-		document.getElementById("login-user-output").innerHTML = response;
+		document.getElementById("login-state-output").innerHTML = response;
+	}).catch(function(err) {
+		console.log("Fetch Error :-S", err);
+	});
+}
+async function checkLoginRequest() {
+	window.fetch(CHECK_LOGIN_URL, {
+		method: "GET"
+	}).then(function(response) {
+		if (response.status >= 200 && response.status < 300)
+			return response;
+		else
+			throw new Error(response.status +":"+response.statusText);
+	}).then(response => response.text()).then(function(response) {
+		document.getElementById("login-state-output").innerHTML = response;
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
