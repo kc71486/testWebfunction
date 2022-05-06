@@ -107,7 +107,7 @@ app.post('/loginUser', (req, res) => {
 					console.log(":" + JSON.stringify(req.session));
 					response.success = true;
 					response.msg = "login successfully";
-					response.uid = req.session.loginUser;
+					response.uid = req.session.uid;
 					res.send(JSON.stringify(response));
 				});
 			}
@@ -149,6 +149,7 @@ app.post('/insertWallet', (req, res) => {
 app.get('/checkLogin', function(req,res){
 	var logined='';
 	if(req.session.uid != ""){
+		console.log("/" + JSON.stringify(req.session));
 		res.send("currently logined, uid=" + req.session.uid);
 	}else{
 		res.send("not logined");
