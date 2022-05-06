@@ -13,8 +13,8 @@ async function insertUserRequest() {
 			return response;
 		else
 			throw new Error(response.status +":"+response.statusText);
-	}).then(function(response) {
-		document.getElementById("insert-user-output").innerHTML = response.text();
+	}).then(response => response.text()).then(function(response) {
+		document.getElementById("insert-user-output").innerHTML = response;
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
@@ -41,15 +41,15 @@ async function loginUserRequest() {
 	});
 }
 async function logoutUserRequest() {
-	window.fetch(LOGIN_USER_URL, {
+	window.fetch(LOGOUT_USER_URL, {
 		method: "GET"
 	}).then(function(response) {
 		if (response.status >= 200 && response.status < 300)
 			return response;
 		else
 			throw new Error(response.status +":"+response.statusText);
-	}).then(function(response) {
-		document.getElementById("login-user-output").innerHTML = response.text();
+	}).then(response => response.text()).then(function(response) {
+		document.getElementById("login-user-output").innerHTML = response;
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
@@ -86,8 +86,8 @@ async function insertWalletRequest() {
 			return response;
 		else
 			throw new Error(response.status +":"+response.statusText);
-	}).then(function(response) {
-		document.getElementById("insert-wallet-output").innerHTML = response.text();
+	}).then(response => response.text()).then(function(response) {
+		document.getElementById("insert-wallet-output").innerHTML = response;
 	}).catch(function(err) {
 		console.log("Fetch Error :-S", err);
 	});
