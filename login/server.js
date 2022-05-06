@@ -27,7 +27,7 @@ app.use(express.static(__dirname + '/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
-	name: identityKey,//store user's cookie key
+	name: identityKey,//store user's cookie key( =sid )
 	secret: 'aki',  // session id related cookie signature
 	//store: new MemoryStore(),
 	store: new FileStore(),
@@ -57,7 +57,8 @@ var allstu = loadJSON(jsonpath);
 app.post('/insertUser', (req, res) => {
 	let message = {
 		user: req.body.user,
-		password: req.body.password
+		password: req.body.password,
+		uid: ""
 	};
 	let hashed = crypto.createHash("sha256").update(req.body.user + "@" + req.body.password, "utf8").digest("hex");
 	allstu.push([req.body.user, req.body.password, hashed]);
@@ -75,34 +76,41 @@ app.post('/loginUser', (req, res) => {
 			success: false,
 			msg: "search failed"
 		};
-		let pattern = /["'=]+/;
-		if(pattern.test(message.user)) {
-			response.msg = "illegal attack";
-			res.send(JSON.stringify(response));
+		if(req.session.uid === "") {
+			success = true;
+			msg = "already login";
+			response.uid = req.session.uid;
 		}
-		/*
-		var sql = 'select * from userInfo where name = "'+message.user+'" and password="'+message.password+'"';
-		console.log(sql);
-		mysql.query(sql,function(err,result,fildes){})
-		*/
-		let result = [];
-		for(let i=0; i<allstu.length; i++) {
-			if(allstu[i][0] == message.user && allstu[i][1] == message.password) {
-				result.push(allstu[i]);
-			}
-		}
-		if (result.length == 0) {
-			response.msg = "no such user";
-			res.send(JSON.stringify(response));
-		}else{
-			response.success = true;
-			response.msg = "login successfully";
-			console.log(JSON.stringify(req.session));
-			req.session.regenerate(function(err){ //add session info
-				req.session.loginUser =  message.user;
-				console.log(":" + JSON.stringify(req.session));
+		else {
+			let pattern = /["'=]+/;
+			if(pattern.test(message.user)) {
+				response.msg = "illegal attack";
 				res.send(JSON.stringify(response));
-			});
+			}
+			/*
+			var sql = 'select * from userInfo where name = "'+message.user+'" and password="'+message.password+'"';
+			console.log(sql);
+			mysql.query(sql,function(err,result,fildes){})
+			*/
+			let result = [];
+			for(let i=0; i<allstu.length; i++) {
+				if(allstu[i][0] == message.user && allstu[i][1] == message.password) {
+					result.push(allstu[i]);
+				}
+			}
+			if (result.length == 0) {
+				response.msg = "no such user";
+				res.send(JSON.stringify(response));
+			}else{
+				req.session.regenerate(function(err){ //add session info
+					req.session.loginUser =  result[0][2];
+					console.log(":" + JSON.stringify(req.session));
+					response.success = true;
+					response.msg = "login successfully";
+					response.uid = req.session.loginUser;
+					res.send(JSON.stringify(response));
+				});
+			}
 		}
 	} catch(e) {
 		try {
