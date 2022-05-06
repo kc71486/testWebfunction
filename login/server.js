@@ -139,7 +139,11 @@ app.get('/showAllUser', (req, res) => {
 });
 
 app.post('/insertWallet', (req, res) => {
-	
+	if(req.session.uid != ""){
+		res.send("currently logined, uid=" + req.session.uid);
+	}else{
+		res.send("not logined");
+	}
 });
 
 app.get('/checkLogin', function(req,res){
