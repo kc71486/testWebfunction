@@ -27,13 +27,16 @@ app.use(express.static(__dirname + '/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
-    name: identityKey,//store user's cookie key
-    secret: 'aki',  // session id related cookie signature
-    store: new FileStore(),
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-        maxAge: 10 * 1000  // ms
+	name: identityKey,//store user's cookie key
+	secret: 'aki',  // session id related cookie signature
+	//store: new MemoryStore(),
+	store: new FileStore(),
+	saveUninitialized: false,
+	resave: false,
+	secure: false,
+	httpOnly: true,
+	cookie: {
+        maxAge: 3600  // s
     }
 }));
 
