@@ -30,7 +30,10 @@ app.use(session({
 	name: identityKey,//store user's cookie key( =sid )
 	secret: 'aki',  // session id related cookie signature
 	//store: new MemoryStore(),
-	store: new FileStore(),
+	store: new FileStore({
+		path: "./sessions",
+		reapInterval: 180,//s
+	}),
 	saveUninitialized: false,
 	resave: false,
 	secure: false,
