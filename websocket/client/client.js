@@ -39,7 +39,7 @@ function wsclose() {
 function wsreceive(event) {
     console.log('recieved: '+event.data);
     console.log(this);
-    setTimeout(()=?{
+    setTimeout(()=>{
         this.send("count="+count);
         count += 1;
     }, 1000);

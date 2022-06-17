@@ -35,7 +35,7 @@ wss.on('connection', function connection(ws) {
     });
     ws.addEventListener('message', function(event) {
         console.log('recieved: '+event.data);
-        setTimeout(()=?{
+        setTimeout(()=>{
             ws.send("server count="+count);
             count += 1;
         }, 1000);
