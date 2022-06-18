@@ -49,8 +49,8 @@ function wsreceive(event) {
     }, 1000);
 }
 function autosend() {
-    console.log("this is"+this);
-    this.send('server count='+count);
+    //console.log("this is"+this);
+    ws.send('server count='+count);
     count += incre;
 }
 // handle http requests
