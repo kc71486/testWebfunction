@@ -26,12 +26,16 @@ const wss = new WebSocketServer({
     port: wsport
 });
 wss.on('connection', function connection(ws) {
-    
+    function autosend() {
+        ws.send('server count='+count);
+        count += incre;
+    }
     ws.addEventListener('open', wsopen);
     ws.addEventListener('close', wsclose);
     ws.addEventListener('message', wsreceive);
     setInterval(autosend, 1000);
     ws.send('first message');
+    
 });
 var count = 0;
 var incre = 1;
@@ -43,15 +47,8 @@ function wsclose(event) {
 }
 function wsreceive(event) {
     console.log('recieved: '+event.data);
-    setTimeout(()=>{
-        this.send('server count='+count);
-        count += incre;
-    }, 1000);
-}
-function autosend() {
-    //console.log("this is"+this);
-    ws.send('server count='+count);
-    count += incre;
+    incre += 1;
+    this.send('incre 1');
 }
 // handle http requests
 app.get('/startsocket', (req, res) => {
