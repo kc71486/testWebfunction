@@ -41,9 +41,8 @@ function wsclose() {
 }
 function wsreceive(event) {
     console.log('recieved: '+event.data);
-    console.log(this);
     setTimeout(()=>{
-        ws.send("count="+count);
+        this.send("count="+count);
         count += 1;
     }, 1000);
 }

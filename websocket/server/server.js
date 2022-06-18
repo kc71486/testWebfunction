@@ -26,21 +26,33 @@ const wss = new WebSocketServer({
     port: wsport
 });
 wss.on('connection', function connection(ws) {
-    let count = 0;
-    ws.addEventListener('open', function() {
-      console.log('websocket connected');
-    });
-    ws.addEventListener('close', function() {
-      console.log('websocket closed');
-    });
-    ws.addEventListener('message', function(event) {
-        console.log('recieved: '+event.data);
-        setTimeout(()=>{
-            ws.send("server count="+count);
-            count += 1;
-        }, 1000);
-    });
+    
+    ws.addEventListener('open', wsopen);
+    ws.addEventListener('close', wsclose);
+    ws.addEventListener('message', wsreceive);
+    setInterval(autosend, 1000);
+    ws.send('first message');
 });
+var count = 0;
+var incre = 1;
+function wsopen(event) {
+    console.log('websocket connected');
+}
+function wsclose(event) {
+    console.log('websocket closed');
+}
+function wsreceive(event) {
+    console.log('recieved: '+event.data);
+    setTimeout(()=>{
+        this.send('server count='+count);
+        count += incre;
+    }, 1000);
+}
+function autosend() {
+    console.log("this is"+this);
+    this.send('server count='+count);
+    count += incre;
+}
 // handle http requests
 app.get('/startsocket', (req, res) => {
     res.send('Success');
