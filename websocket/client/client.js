@@ -28,7 +28,7 @@ function startWebsocket() {
     */
 }
 function establishws() {
-    ws = new WebSocket('ws://luffy.ee.ncku.edu.tw:'+wsport+'/');
+    ws = new WebSocket('ws://140.116.177.150:'+wsport+'/');
     ws.addEventListener('open', wsopen);
     ws.addEventListener('close', wsclose);
     ws.addEventListener('message', wsreceive);
@@ -43,7 +43,7 @@ function wsreceive(event) {
     console.log('recieved: '+event.data);
     console.log(this);
     setTimeout(()=>{
-        this.send("count="+count);
+        ws.send("count="+count);
         count += 1;
     }, 1000);
 }
