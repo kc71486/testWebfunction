@@ -17,12 +17,15 @@ function establishws() {
     ws.addEventListener('open', wsopen);
     ws.addEventListener('close', wsclose);
     ws.addEventListener('message', wsreceive);
-}this.send("count="+count);
+}
 function wsopen() {
     console.log('websocket connected');
 }
 function wsclose() {
     console.log('websocket closed');
+}
+function wsreceive(event) {
+    console.log('receive: ' + event.data);
 }
 function addincre() {
     ws.send('add incre');
