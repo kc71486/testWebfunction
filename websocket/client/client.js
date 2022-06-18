@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             establishws();
         };
         document.getElementById('sendbtn').onclick = (event) => {
-            establishws();
+            addincre();
         };
     });
 
