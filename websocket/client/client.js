@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
 function startWebsocket() {
+    establishws();
+    /*
     window.fetch('/startsocket', {
         method: 'GET'
     }).then(function(response) {
@@ -23,6 +25,7 @@ function startWebsocket() {
     }).catch(function(err) {
         console.log('Fetch Error :', err);
     });
+    */
 }
 function establishws() {
     ws = new WebSocket('ws://luffy.ee.ncku.edu.tw:'+wsport+'/');

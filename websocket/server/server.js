@@ -3,7 +3,7 @@
 //import
 import express from 'express'
 import bodyParser from 'body-parser'
-import WebSocket from 'ws';
+import WebSocket, { WebSocketServer } from 'ws';
 
 //directory
 import { dirname } from 'path'
@@ -22,7 +22,7 @@ app.use(express.static(__rootname + '/client'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // handle websocket
-const wss = new WebSocket.Server({
+const wss = new WebSocketServer({
     port: wsport
 });
 wss.on('connection', function connection(ws) {
