@@ -38,7 +38,6 @@ const queryPromise = sql => {
 const app  = express();
 expressWs(app);
 const port = 18237;
-const wsport = 18247;
 // start the server
 app.listen(port, () => {console.log('listening on port: ' + port);});
 // handle other urls

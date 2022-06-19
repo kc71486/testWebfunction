@@ -1,5 +1,4 @@
 const port = 18237;
-const wsport = 18247;
 var ws1, ws2;
 var count = 0; 
 
@@ -16,11 +15,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
 function establishws() {
-    ws1 = new WebSocket('ws://140.116.177.150:'+wsport+'/increment');
+    ws1 = new WebSocket('ws://140.116.177.150:'+port+'/increment');
     ws1.addEventListener('open', wsopen);
     ws1.addEventListener('close', wsclose);
     ws1.addEventListener('message', wsreceive);
-    ws2 = new WebSocket('ws://140.116.177.150:'+wsport+'/getfile');
+    ws2 = new WebSocket('ws://140.116.177.150:'+port+'/getfile');
     ws2.binaryType = 'blob';
     ws2.addEventListener('open', wsopen);
     ws2.addEventListener('close', wsclose);
