@@ -36,6 +36,7 @@ const queryPromise = sql => {
 
 // construct a web server instance
 const app  = express();
+expressWs = expressWs(app);
 const port = 18237;
 const wsport = 18247;
 // start the server
