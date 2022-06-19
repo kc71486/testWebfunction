@@ -50,7 +50,7 @@ var count = 0;
 var incre = 1;
 app.ws('/increment', (ws, req) => {
     ws.on('message', function(msg) {
-        incre += msg;
+        incre += parseInt(msg);
     });
     setInterval(function(msg) {
         ws.send('count='+count);
