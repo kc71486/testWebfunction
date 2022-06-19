@@ -3,12 +3,36 @@
 //import
 import express from 'express'
 import bodyParser from 'body-parser'
-import WebSocket, { WebSocketServer } from 'ws';
+import expressWs from 'express-ws';
+import mysql from 'mysql'
 
 //directory
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 const __rootname = dirname(dirname(fileURLToPath(import.meta.url)));
+
+//mysql
+const config = {
+  'mysql': {
+    'database': 'wp2022_group8',
+    'host': 'localhost',
+    'password': 'G2FxUI4XqP1TwkerEkHvzmpUIPWrOrkoBFqyNINMlbE=',
+    'user': 'wp2022_group8'
+  }
+}
+var connection = mysql.createConnection(config.mysql)
+connection.connect(err => {
+  if(err) throw err
+  console.log("MYSQL Connected")
+})
+const queryPromise = sql => {
+  return new Promise((res, rej) => {
+    connection.query(sql, (err, rows) => {
+      if(err) rej(err);
+      else res(rows)
+    })
+  })
+}
 
 // construct a web server instance
 const app  = express();
@@ -22,34 +46,30 @@ app.use(express.static(__rootname + '/client'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // handle websocket
-const wss = new WebSocketServer({
-    port: wsport
-});
-wss.on('connection', function connection(ws) {
-    function autosend() {
-        ws.send('server count='+count);
-        count += incre;
-    }
-    ws.addEventListener('open', wsopen);
-    ws.addEventListener('close', wsclose);
-    ws.addEventListener('message', wsreceive);
-    setInterval(autosend, 1000);
-    ws.send('first message');
-    
-});
 var count = 0;
 var incre = 1;
-function wsopen(event) {
-    console.log('websocket connected');
-}
-function wsclose(event) {
-    console.log('websocket closed');
-}
-function wsreceive(event) {
-    console.log('recieved: '+event.data);
-    incre += 1;
-    this.send('incre 1');
-}
+app.ws('/increment', (ws, req) => {
+    ws.on('message', function(msg) {
+        incre += msg;
+    });
+    setIntervel(function(msg) {
+        ws.send('count='+count);
+    }, 1000)
+});
+app.ws('/getfile', (ws, req) => {
+    let sql  = `SELECT picture FROM card WHERE cid = 2 AND cardset = 6`
+    let ret = null;
+    queryPromise(sql).then(result => {
+        ret = result.picture[0];
+    }).catch(err => {
+        console.log(err);
+        res.status(500).end();
+    })
+    setTimeout(function(msg) {
+        if(ret != null)
+            ws.send(ret);
+    }, 2000)
+});
 // handle http requests
 app.get('/startsocket', (req, res) => {
     res.send('Success');
