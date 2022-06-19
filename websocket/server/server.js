@@ -54,6 +54,7 @@ app.ws('/increment', (ws, req) => {
     });
     setInterval(function(msg) {
         ws.send('count='+count);
+        count += incre;
     }, 1000)
 });
 app.ws('/getfile', (ws, req) => {
