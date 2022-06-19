@@ -34,7 +34,6 @@ function wsclose() {
     console.log('websocket closed');
 }
 function wsreceive(event) {
-    console.log(event.data);
     document.getElementById('recievearea').innerHTML = 'receive: ' + event.data;
 }
 function addincre() {

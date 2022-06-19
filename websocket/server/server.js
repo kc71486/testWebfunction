@@ -69,6 +69,7 @@ app.ws('/getfile', (ws, req) => {
     setTimeout(function(msg) {
         if(ret != null)
             ws.send(ret);
+        ws.close();
     }, 2000)
 });
 // handle http requests
