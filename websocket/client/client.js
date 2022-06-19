@@ -41,6 +41,6 @@ function addincre() {
     ws1.send(1);
 }
 function wspicture(event) {
-    let imageUrl = urlCreator.createObjectURL(event.data)
+    let imageUrl = URL.createObjectURL(event.data)
     document.getElementById("image1").src = imageUrl;
 }

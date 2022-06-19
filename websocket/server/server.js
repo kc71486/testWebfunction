@@ -52,7 +52,7 @@ app.ws('/increment', (ws, req) => {
     ws.on('message', function(msg) {
         incre += msg;
     });
-    setIntervel(function(msg) {
+    setInterval(function(msg) {
         ws.send('count='+count);
     }, 1000)
 });
