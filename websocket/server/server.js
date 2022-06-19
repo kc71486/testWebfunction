@@ -60,7 +60,7 @@ app.ws('/getfile', (ws, req) => {
     let sql  = `SELECT picture FROM card WHERE cid = 2 AND cardset = 6`
     let ret = null;
     queryPromise(sql).then(result => {
-        ret = result.picture[0];
+        ret = result[0].picture;
     }).catch(err => {
         console.log(err);
         res.status(500).end();

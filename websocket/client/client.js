@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('increbtn').onclick = (event) => {
             addincre();
         };
-        document.getElementById('increbtn').onclick = (event) => {
-            addincre();
+        document.getElementById('getbtn').onclick = (event) => {
+            establishws2();
         };
     });
 
@@ -19,6 +19,8 @@ function establishws() {
     ws1.addEventListener('open', wsopen);
     ws1.addEventListener('close', wsclose);
     ws1.addEventListener('message', wsreceive);
+}
+function establishws2() {
     ws2 = new WebSocket('ws://140.116.177.150:'+port+'/getfile');
     ws2.binaryType = 'blob';
     ws2.addEventListener('open', wsopen);
@@ -32,6 +34,7 @@ function wsclose() {
     console.log('websocket closed');
 }
 function wsreceive(event) {
+    console.log(event.data);
     document.getElementById('recievearea').innerHTML = 'receive: ' + event.data;
 }
 function addincre() {
