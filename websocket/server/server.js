@@ -3,6 +3,7 @@
 //import
 import express from 'express'
 import bodyParser from 'body-parser'
+import expressWs from 'express-ws'
 import mysql from 'mysql'
 
 //directory
@@ -35,7 +36,7 @@ const queryPromise = sql => {
 
 // construct a web server instance
 const app  = express();
-const expressWs = import('express-ws')(app);
+expressWs(app);
 const port = 18237;
 const wsport = 18247;
 // start the server
