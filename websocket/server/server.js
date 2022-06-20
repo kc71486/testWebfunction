@@ -64,7 +64,8 @@ app.ws('/getfile', (ws, req) => {
         ret = result[0].picture;
     }).catch(err => {
         console.log(err);
-        res.status(500).end();
+        ws.send(err);
+        ws.close();
     })
     setTimeout(function(msg) {
         if(ret != null)
